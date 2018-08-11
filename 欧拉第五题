@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<inttypes.h>
+int zdgys(int i,int64_t jj)//递归实现辗转相除法求最大公约数。
+{
+    if(i%jj==0)return jj;
+    else
+    {
+        int tmp;
+        tmp=i;
+        i=jj;
+        jj=tmp%jj;
+        return zdgys(i,jj);
+    }
+    //最简洁:return(jj?gcd(jj,i%jj):i);
+}
+int main()
+{
+    int i;int64_t j=1;
+    for(i=2;i<=20;i++)
+    {
+        //if(j%i==0)continue;
+        //j = j * i / zdgys(i,j);
+       j=i*j/zdgys(i,j);//使用循环,根据最小公倍数等于两数相乘后除以最大公约数可得多数的最小公倍数。
+    }
+    printf("%"PRId64"\n",j);
+    return 0;
+}
