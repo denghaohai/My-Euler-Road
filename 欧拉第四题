@@ -1,0 +1,46 @@
+#include<stdio.h>
+int main()
+{
+    int i=0,j=0,sum=0;
+    int a,b,c,d,e,f;
+    for(i=900;i<=999;i++)//求两个三位数乘积而得的最大回文数，先缩小范围再枚举破解。
+    for(j=900;j<=999;j++)
+    {
+        a=i*j/100000;
+        b=(i*j/10000)%10;
+        c=(i*j/1000)%10;
+        d=(i*j/100)%10;
+        e=(i*j/10)%10;
+        f=(i*j)%10;
+        if(a==f&&b==e&&c==d)sum=i*j;
+        else continue;
+    }
+    printf("%d\n",sum);
+    return 0;
+}*/
+#include<stdio.h>
+int is_palindromic(int x)
+{
+    int temp = x,num = 0;
+    while(x)
+    {
+        num = num * 10 + x % 10;
+        x /= 10;
+    }
+    return temp == num;
+}
+int main()
+{
+    int i,j;
+    int ans = 0;
+    for(i=100;i<1000;i++)
+    {
+        for(j = i;j < 1000;j++)
+       { if(i * j < ans)continue;
+        if(!is_palindromic(i*j))continue;
+        ans = i * j;
+    }}
+    printf("%d\n",ans); 
+    printf("%d %d",i,j);
+    return 0;
+}

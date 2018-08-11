@@ -1,0 +1,67 @@
+/*#include<stdio.h>
+int panduan(int i,int j,int k)
+{
+     if(i*i+j*j==k*k)
+     return 1;
+     else
+    return 0;
+}
+int main()
+{
+    int i,j,k;
+    int ii,jj,kk;
+    for(i=1;i<=1000;i++)
+    for(j=i;j<=1000;j++)
+    for(k=j;k<=1000;k++)
+    {
+        if(i+j+k==1000&&panduan(i,j,k))
+        {ii=i;jj=j;kk=k;}
+        else
+        continue;
+    }
+    printf("%d %d %d",ii,jj,kk);
+    return 0;
+}*/
+#include <stdio.h>
+
+#include <stdlib.h>
+
+#include <math.h>
+
+ 
+
+int main() {
+
+    bool flag = true;
+
+    int32_t a, b, c, e;
+
+    for (int32_t i = 1; i < 32 && flag; ++i) {
+
+        for (int32_t j = i + 1; j <= 32 && flag; ++j) {
+
+            a = j * j - i * i;
+
+            b = 2 * i * j;
+
+            c = i * i + j * j;
+
+            if (1000 % (a + b + c) == 0) {
+
+                e = (int32_t)pow(1000 / (a + b + c), 3);
+
+                printf("%d\n", e * a * b * c);
+
+                flag = false;
+
+            }
+
+        }
+
+    }
+
+    return 0;
+
+}
+//1.勾股数的整数倍也是勾股数　　２．若a b c 为勾股数那么它们两两互质　３．勾股数中a , b 必为一奇一偶　４．任何素勾股数均可表示为以下形式，其中n < m
+//gcd(n,m) = 1. a = 2 * n * m,b = n * n - m * m c = n * n + m * m.

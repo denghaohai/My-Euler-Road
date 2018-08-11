@@ -1,0 +1,21 @@
+#include<stdio.h>
+#define MAX_N 15
+int dp[MAX_N + 5][MAX_N + 5];
+int jy[MAX_N + 5][MAX_N + 5] = {0};
+int solve(int i, int j)
+{
+    if(i == MAX_N)return 0;
+    if(jy[i][j])return jy[i][j];
+    jy[i][j] = (solve(i + 1,j) > solve(i + 1, j + 1) ? solve(i + 1, j) :solve(i + 1,j + 1)) + dp[i][j];
+    return jy[i][j];
+}
+int main()
+{
+    for(int i = 0;i < 15 ;i++)
+     for(int j = 0;j <= i;j++)
+     {
+      scanf("%d",dp[i] + j);  
+     }
+    printf("%d\n",solve(0,0));
+    return 0;
+}

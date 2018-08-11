@@ -1,0 +1,49 @@
+#include<stdio.h>
+#define MAX_N 10000
+int is_prime[MAX_N + 5] = {0};
+int prime[MAX_N + 5] = {0};
+int dnum[MAX_N + 5] = {0,1,0};
+void init()
+{
+    for(int i = 2;i <= MAX_N;i++)
+    {
+      if(is_prime[i] == 0)
+        {
+            is_prime[i] = i;
+            prime[++prime[0]] = i;
+            dnum[i] = i + 1;
+        }
+      for(int j = 1; j<= MAX_N;j++)
+        {
+            if(prime[j] * i > MAX_N)break;
+            if(i % prime[j] == 0)
+            {
+                is_prime[prime[j] * i] = is_prime[i] * prime[j];
+                dnum[prime[j] * i] = dnum[i] * (is_prime[i] * prime[j] * prime[j] - 1) / (is_prime[i] * prime[j] - 1);
+            break;
+            }
+            else
+            {
+               is_prime[i * prime[j]] = prime[j];
+               dnum[prime[j] * i] = dnum[prime[j]] * dnum[i];
+            }
+        }
+    }
+    return;
+}
+int main()
+{
+    init();
+    int sum = 0;
+    for(int i = 1;i <= MAX_N;i++)
+    {
+        dnum[i] -= i;
+    }
+    for(int i = 1;i <= MAX_N;i++)
+    {
+        if(dnum[i] <= MAX_N && dnum[i] != i && i == dnum[dnum[i]])
+           sum += i;
+    }
+    printf("%d\n",sum);
+    return 0;
+}
