@@ -1,0 +1,31 @@
+//质数基础筛法：
+#include<stdio.h>
+#include<math.h>
+#include<inttypes.h>
+#define N 100000001
+int a[N];
+int main()
+{
+    int64_t i,j;
+    int64_t num,sum;
+    a[1]=0;a[2]=1;
+    for(i=3;i<=N;i++)//先把大于2的偶数置为非质数；
+    {
+        if(i%2==0)a[i]=0;
+        else
+        a[i]=1;
+    }
+    for(i=3;i<=sqrt(N)+1;i++)//因为N若为合数那么它的最大因数不超过他的平方根加1；
+    {
+        if(a[i]==1)
+       { for(j=i+i;j<N;j+=i)a[j]=0; }//再把其他质数的倍数置为非质数。
+    }
+    for(i=3;i<N;i++)
+    {
+        if(a[i])num++;
+        if(num==10000)
+            break;
+    }
+    printf("%"PRId64"\n",i);
+    return 0;
+}
