@@ -1,0 +1,28 @@
+#include<stdio.h>
+int fangxiang[4][2] = {0,1,1,1,1,0,1,-1};
+int main()
+{   
+    int a[30][30];
+    int zero = 0,ans = 0;
+    for(int i = 5;i <= 25;i++)
+    {
+        for(int j = 5;j <= 25;j++)
+        scanf("%d",&a[i][j]);
+    }
+    for(int i = 5;i <= 25;i++)
+    {
+        for(int j = 5;j <= 25;j++)
+        {   int p = 1;
+            for(int k = 0 ; k < 4;k++)
+            for(int step = 1;step <= 4;step++)
+            {
+               int x = i + step * fangxiang[k][0];
+               int y = j + step * fangxiang[k][1];
+               p *= a[x][y];
+            }
+         if(p > ans)ans = p;
+        }
+    }
+    printf("%d\n",ans);
+    return 0;
+}
