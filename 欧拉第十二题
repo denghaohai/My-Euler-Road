@@ -1,0 +1,47 @@
+#include<stdio.h>
+#define MAX_N 20000
+int mnum[MAX_N] = {0};
+long long int num[MAX_N] = {0};
+int prime[MAX_N] = {0};
+void init()
+{
+    for(int i = 2;2 * i <= MAX_N;i++)
+    {
+        if(prime[i] == 0)
+        {
+            prime[++prime[0]] = i;
+            mnum[i] = 1;
+            num[i] = 2;
+        }
+        for(int j = 1;j <= prime[0];j++)
+        {
+            if(i * prime[j] > MAX_N)break;
+            prime[i * prime[j]] = 1;
+            if(i % prime[j] == 0)
+            {
+                mnum[i * prime[j]] = mnum[i] + 1;//由于mnum[i]的值在i小的时候计算过了所以正确。
+num[i * prime[j]] = (num[i] / (mnum[i] + 1)) * (mnum[i] + 2);
+                break;
+            }
+            else
+            {
+                mnum[i * prime[j]] = 1;
+                num[i * prime[j]] = num[i] * num[prime[j]];
+            }
+        }
+    }
+    return ;
+}
+int ji_suang(int x)
+{
+    if(x & 1)return num[x] * num[(x + 1)/ 2];
+    else return num[x / 2] * num[x + 1];
+}
+int main()
+{   
+    init();
+    int x = 100;
+    while(ji_suang(x) < 500) x++;
+    printf("%d\n",x * (x + 1) / 2);
+    return 0;
+}
