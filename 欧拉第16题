@@ -1,0 +1,26 @@
+#include<stdio.h>
+int mi_is[1000] = {1 , 1};
+int main()
+{
+    for(int i = 1;i <= 1000;i++)
+    {
+        for(int j = mi_is[0];j >= 1;j -- )//大数从高位进位比从低位进位好些，因为从低位开始进位那么低位进位后进位的数字被高位相加那么后面的运算就会多运算进位的数字。
+        {
+            mi_is[j] *= 2;
+        //}    
+            if(mi_is[j] >= 10)
+            {
+                mi_is[j+1] += mi_is[j] / 10;
+                mi_is[j] %= 10;
+                if(j == mi_is[0])
+                mi_is[0] ++;
+            }
+        //}
+    }
+    int sum = 0;
+    for(int i = 1 ;i <= mi_is[0];i++)
+    sum += mi_is[i];
+    printf("%d\n",sum);
+    return 0;
+}
+//两处任意一处打括号都行
