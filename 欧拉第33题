@@ -1,0 +1,49 @@
+#include<stdio.h>
+int main()
+{
+    int a[4];int aa[4],bb[4];
+    int s = 0;
+    for(int i = 10;i <= 98;i++)
+    {
+        for(int j =i + 1;j <= 99;j++)
+        {
+            a[0] = i / 10;
+            a[1] = i % 10;
+            a[2] = j / 10;
+            a[3] = j % 10;
+            if(a[0] == a[2] && a[1] * j == a[3] * i)
+            {
+                  aa[s] = i;
+                  bb[s] = j;
+                  s++;
+            }
+            else if(a[0] == a[3] && a[1] * j == a[2] * i)
+            {   
+                  aa[s] = i;
+                  bb[s] = j;
+                  s++; 
+            }  
+            else if(a[1] == a[2] && a[0] * j == a[3] * i)
+            {   
+                   aa[s] = i;
+                   bb[s] = j;
+                   s++;
+            }
+            else if(a[1] == a[3] && a[0] * j == a[2] * i && a[1] != 0)
+            {  
+                   aa[s] = i;
+                   bb[s] = j;
+                   s++;    
+            }
+        }
+    }
+    int sum = 1;
+    int sum1 = 1;
+    for(int i = 0;i < 4;i++)
+    {
+        sum *= aa[i];
+        sum1 *= bb[i];
+    }
+    printf("%d\n",sum1 / sum);
+    return 0;
+}
