@@ -44,3 +44,4 @@ int main()
 //一句代码求一个数的位数
 //printf("%d,printf("%d",n));
 //由于printf的返回值为传入参字符的个数且嵌套使用时先运行里层printf。
+//比log高效。
