@@ -1,0 +1,37 @@
+#include<stdio.h>
+#define MAX_N 2540160
+int a[10];
+void init()
+{
+    a[1] = 1;
+    a[0] = 1;
+    for(int i = 2 ; i < 10;i++)
+    {
+        a[i] =i * a[i - 1];
+    }
+    return;
+}
+int zq(int x)
+{
+    int tmp = x;
+    int sum = 0;
+    while(tmp)
+    {
+        sum += a[tmp % 10];
+        tmp /= 10;
+    }
+    return sum == x;
+}
+int main()
+{
+    init();
+    long long int z_sum = 0;
+    for(int i = 3;i <= MAX_N;i++)
+    {
+        if(!zq(i))
+        continue;
+        z_sum += i;
+    }
+    printf("%lld\n",z_sum);
+    return 0;
+}
