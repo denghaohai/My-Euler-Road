@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#define MAX_N 1000000
+int prime[MAX_N + 5] = {0};
+int is_prime[MAX_N + 5] = {0};
+int panduan(int k,int *a)
+    {
+            if(k == 1)return 1;
+            for(int i = 1 ; i < k; i++)
+        {
+                    int t = a[k - 1];
+                    for(int j = k - 1; j >= 1;j--)
+            {
+                            a[j] = a[j - 1];
+                        
+            }
+                    a[0] = t;
+                    int sum1 = 0;
+                    int x = k;
+                    while(x)
+            {
+                            sum1 += a[x - 1] * pow(10,x - 1);
+                            x--;
+                        
+            }
+                    if(is_prime[sum1])
+            {
+                            sum1 = 0;
+                            return 0;
+                        
+            }    
+                
+        }
+            return 1;
+
+    }
+    int main()
+    {
+            for(int i = 2;i <= MAX_N;i++)
+        {
+                    if(!is_prime[i])prime[++prime[0]] = i;
+                    for(int j = 1;j <= prime[0]  && prime[j] * i <= MAX_N;j++)
+            {
+                            is_prime[i * prime[j]] = 1;
+                           if(i % prime[j] == 0)break;
+                        
+            }
+                
+        }
+            int sum = 0,k = 0;
+            int a[10];
+            for(int i = 2;i <= MAX_N;i++)
+            { 
+                    if(!is_prime[i])
+                {
+                            int j = i;
+                            while(j)
+                    {
+                                    a[k] = j % 10;
+                                    j /= 10;
+                                    k++;
+                                
+                    }
+                            sum += panduan(k,a);
+                            k = 0;
+                         
+                }
+                }
+            printf("%d\n",sum);
+            return 0;
+}
