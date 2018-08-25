@@ -1,0 +1,25 @@
+#include<stdio.h>
+#define MAX_N 1000000
+int zq(int x,int k)
+{
+    int tmp = x;
+    int sum = 0;
+    while(x)
+    {
+        sum = sum * k + x % k;
+        x /= k;
+    }
+    return tmp == sum;
+}
+int main()
+{
+    int z_sum = 0;
+    for(int i = 1;i <= MAX_N;i++)
+    {
+        if(!zq(i,10))continue;
+        if(!zq(i,2))continue;
+        z_sum += i;
+    }
+    printf("%d\n",z_sum);
+    return 0;
+}
